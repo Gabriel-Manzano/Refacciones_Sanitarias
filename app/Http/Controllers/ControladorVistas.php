@@ -26,9 +26,6 @@ class ControladorVistas extends Controller
         return view('carrito');
     }
 
-    public function gestionUser(){
-        return view('gestionUser');
-    }
 
     public function gestionProduct(){
         return view('gestionProduct');
