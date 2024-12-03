@@ -13,14 +13,14 @@
                 {{ session('success') }}
             </div>
         @endif
-        <a href="{{ route('usuarios.create') }}"
+        <a href="{{ route('admin.users.create') }}"
             class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl px-6 py-3 text-center">
             Crear Usuario
         </a>
 
 
         <div class="px-4 py-3">
-            <form method="GET" action="{{ route('usuarios.index') }}">
+            <form method="GET" action="{{ route('admin.admin.users.index') }}">
                 <label class="flex flex-col min-w-40 h-12 w-full">
                     <div class="flex w-full flex-1 items-stretch rounded-xl h-full">
                         <div class="text-[#60778a] flex border-none bg-[#f0f2f5] items-center justify-center pl-4 rounded-l-xl border-r-0"
@@ -81,10 +81,9 @@
                                 <td
                                     class="table-column-480 h-[72px] px-4 py-2 w-60 text-[#60778a] text-sm font-bold leading-normal tracking-[0.015em]">
                                     <!-- Botones de acción -->
-                                    <a href="{{ route('usuarios.edit', $usuario->id) }}"
-                                        class="text-blue-500 hover:text-blue-700 px-3 py-2 rounded-xl">Actualizar</a>
-                                    <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST"
-                                        class="inline-block">
+                                    <a href="{{ route('admin.users.edit', $usuario->id) }}"
+                                    class="text-blue-500 hover:text-blue-700 px-3 py-2 rounded-xl">Actualizar</a>
+                                    <form action="{{ route('admin.users.destroy', $usuario->id) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"

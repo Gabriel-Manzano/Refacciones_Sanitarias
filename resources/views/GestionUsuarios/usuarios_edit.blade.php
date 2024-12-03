@@ -12,7 +12,7 @@
 
             <div class="card shadow-lg">
                 <div class="card-body">
-                    <form action="{{ route('usuarios.update', $usuario->id) }}" method="POST">
+                    <form action="{{ route('admin.users.update', $usuario->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
@@ -51,7 +51,7 @@
 
                         <!-- Botones de Acción -->
                         <div class="flex justify-between mt-6">
-                            <a href="{{ route('usuarios.index') }}" class="inline-block px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-700">
+                            <a href="{{ route('admin.users.index') }}" class="inline-block px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-700">
                                 Cancelar
                             </a>
                             <button type="submit" class="inline-block px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
