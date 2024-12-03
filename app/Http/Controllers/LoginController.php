@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -24,15 +24,15 @@ class LoginController extends Controller
         ]);
 
         // Buscar al usuario
-        $user = User::where('email', $request->email)->first();
+        $user = Usuario::where('correo', $request->email)->first();
 
         // Validar credenciales
-        if ($user && Hash::check($request->password, $user->password)) {
+        if ($user && Hash::check($request->password, $user->contraseña)) {
             // Iniciar sesión del usuario manualmente
-            session(['user_id' => $user->id, 'role' => $user->role]); // Guardar datos en sesión
+            session(['user_id' => $user->id, 'role' => $user->rol]); // Guardar datos en sesión
 
             // Redirigir según el rol del usuario
-            if ($user->role === 'admin') {
+            if ($user->rol === 'Administrador') {
                 return redirect()->route('admin.dashboard');
             } else {
                 return redirect()->route('user.dashboard');
