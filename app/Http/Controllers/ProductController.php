@@ -34,11 +34,12 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Producto creado exitosamente.');
     }
 
-    public function edit(Product $product)
+    public function edit($id)
     {
-        // Mostrar formulario para editar un producto existente
+        $product = Product::findOrFail($id);
         return view('productos.editProduct', compact('product'));
     }
+    
 
     public function update(Request $request, Product $product)
     {
