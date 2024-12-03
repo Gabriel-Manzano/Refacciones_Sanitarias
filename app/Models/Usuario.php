@@ -10,4 +10,8 @@ class Usuario extends Model
     use HasFactory;
     protected $fillable = ['nombre', 'correo', 'contraseña', 'rol'];
 
+    protected $hidden = [
+        'contraseña',
+    ];
+
 }

@@ -5,6 +5,10 @@ use App\Http\Controllers\ControladorVistas;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CartController;
+
 //Gestion de usuarios
 Route::prefix('/admin/users')->group(function () {
     Route::get('/', [UsuarioController::class, 'index'])->name('admin.users.index');
@@ -18,7 +22,8 @@ Route::prefix('/admin/users')->group(function () {
 //
 
 Route::get('/registro',[controladorVistas::class,'registro'])->name('rutaregistro');
-Route::get('/',[controladorVistas::class,'inicio'])->name('rutainicio');
+Route::post('/registro', [RegistroController::class, 'store'])->name('registro.store');
+Route::get('/', function () {return view('profile.partials.userDashboard');})->name('rutainicio');
 Route::get('/perfil',[controladorVistas::class,'perfil'])->name('rutaperfil');
 Route::get('/carrito',[controladorVistas::class,'carrito'])->name('rutacarrito');
 
@@ -40,3 +45,10 @@ Route::post('/products', [ProductController::class, 'store'])->name('products.st
 Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+// Carrito
+Route::get('/carrito', [CartController::class, 'index'])->name('rutacarrito');
+Route::post('/carrito/agregar', [CartController::class, 'add'])->name('carrito.add');
+Route::post('/carrito/actualizar', [CartController::class, 'update'])->name('carrito.update');
+Route::post('/carrito/eliminar', [CartController::class, 'remove'])->name('carrito.remove');
+
