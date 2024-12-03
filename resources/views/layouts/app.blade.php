@@ -29,7 +29,7 @@
                                     class="flex items-center gap-3 px-3 py-2 text-[#111518] text-sm font-medium leading-normal">Clientes</a>
                                 <a href="#"
                                     class="flex items-center gap-3 px-3 py-2 text-[#111518] text-sm font-medium leading-normal">Productos</a>
-                                <a href="{{ route('usuarios.index') }}"
+                                <a href="{{ route('admin.users.index') }}"
                                     class="flex items-center gap-3 px-3 py-2 rounded-xl bg-[#f0f2f5] text-[#111518] text-sm font-medium leading-normal">Usuarios</a>
                             </div>
                         </div>

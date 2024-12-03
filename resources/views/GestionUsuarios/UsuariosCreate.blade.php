@@ -62,7 +62,7 @@
                     
                         <!-- Botones de Acción -->
                         <div class="flex justify-between mt-6">
-                            <a href="{{ route('usuarios.index') }}"
+                            <a href="{{ route('admin.users.index') }}"
                                 class="inline-block px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-700">
                                 Cancelar
                             </a>

@@ -16,38 +16,44 @@ class UsuarioController extends Controller
             ->orWhere('rol', 'like', "%$search%")
             ->get();
 
-        return view('GestionUsuarios.gestionUser', compact('usuarios'));
+        return view('usuarios.gestionUsers', compact('usuarios'));
     }
+
+
 
     public function create()
     {
-        return view('GestionUsuarios.UsuariosCreate');
+        return view('usuarios.UsuariosCreate');
     }
+
 
     public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
             'correo' => 'required|email|unique:usuarios,correo',
-            'password' => 'required|string|min:8',
+            'contraseña' => 'required|string|min:8',
             'rol' => 'required|in:Administrador,Miembro,Editor',
         ]);
 
         Usuario::create([
-            'correo' => $request->correo,
-            'contraseña' => bcrypt($request->contraseña),
             'nombre' => $request->nombre,
+            'correo' => $request->correo,
+            'contraseña' => bcrypt($request->contraseña), // Encripta la contraseña
             'rol' => $request->rol,
         ]);
 
-        return redirect()->route('usuarios.index')->with('success', 'Usuario creado con éxito.');
-
+        return redirect()->route('admin.users.index')->with('success', 'Usuario creado con éxito.');
     }
+
+
 
     public function edit($id)
     {
+        // Busca al usuario por ID
         $usuario = Usuario::findOrFail($id);
 
+        // Devuelve una vista para editar al usuario
         return view('GestionUsuarios.usuarios_edit', compact('usuario'));
     }
 
@@ -62,13 +68,19 @@ class UsuarioController extends Controller
 
         $usuario->update($request->only('correo', 'nombre', 'rol'));
 
-        return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente.');
+        return redirect()->route('admin.users.index')->with('success', 'Usuario actualizado exitosamente.');
     }
 
-    public function destroy(Usuario $usuario)
+    public function destroy($id)
     {
+        // Busca al usuario por ID
+        $usuario = Usuario::findOrFail($id);
+    
+        // Elimina el usuario
         $usuario->delete();
-
-        return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente.');
+    
+        // Redirige a la lista de usuarios con un mensaje de éxito
+        return redirect()->route('admin.users.index')->with('success', 'Usuario eliminado exitosamente.');
     }
+    
 }
